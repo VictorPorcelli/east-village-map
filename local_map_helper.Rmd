@@ -1,0 +1,43 @@
+---
+title: "local_map_helper"
+author: "Victor Porcelli"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list = ls())
+knitr::opts_chunk$set(echo = TRUE)
+source("/Users/victorporcelli/Desktop/R Work/Functions/init.R")
+```
+
+```{r}
+in_file <- readxl::read_xlsx("/Users/victorporcelli/Desktop/Local Map Files/Interactive Local Map Design.xlsx")
+in_file %>% print()
+```
+
+
+```{r}
+purrr::walk(in_file$Business, function(business){
+  x_min <- in_file$x_min[match(business, in_file$Business)]
+  x_max <- in_file$x_max[match(business, in_file$Business)]
+  
+  y_min <- in_file$y_min[match(business, in_file$Business)]
+  y_max <- in_file$y_max[match(business, in_file$Business)]
+  
+  # change this to Description once we have it
+  tooltip_text <- in_file$Description[match(business, in_file$Business)]
+  tooltip_title <- business
+  
+  start_str <- ifelse(match(business, in_file$Business) == 1, "\tif", "else if")
+  
+  my_string <- paste0(start_str,' (x >= ', x_min, ' && x <= ', x_max, ' && y >= ', y_min, ' && y <= ', y_max, ') {
+                showTooltip("', tooltip_title, '", "',tooltip_text, '", x, y);
+            }')
+  
+  cat(my_string)
+})
+```
+
+
+
