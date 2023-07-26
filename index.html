@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Interactive Map</title>
+    <style>
+        /* Style for the tooltip (text box) */
+        .tooltip {
+            position: absolute;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 5px;
+            display: none;
+            z-index: 1;
+        }
+
+        #map-legend {
+            position: absolute;
+            top: 50px; /* Set the desired y-coordinate value in pixels */
+            left: 820px; /* Set the desired x-coordinate value in pixels */
+        }
+
+        #info-box {
+            position: absolute; /* Set position to absolute for the text box */
+            top: 78%; /* Position the text box 78% from the top of the container */
+            left: 35%; /* Position the text box 35% from the left of the container */
+            transform: translate(-50%, -50%); /* Center the text box */
+            color: #666;
+            padding: 5px;
+        }
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+<body>
+    <div style="text-align: left;">
+        <div id="map-container" style="position: relative;">
+            <img src="local_map.png" width="800" height="600" alt="Local Map">
+            <div id="tooltip" class="tooltip"></div>
+        </div>
+    </div>
+
+    <div id="map-legend">
+        <img src="map_legend.png" width="725" height="1100" alt="Map Legend">
+    </div>
+
+    <!-- Information box -->
+    <div id="info-box">
+        Click an icon to read more information about the location.
+    </div>
+
+    <script>
+        // Function to show the tooltip with the given text content at the specified position
+        function showTooltip(title, text, x, y) {
+            var tooltip = document.getElementById("tooltip");
+            tooltip.innerHTML = "<b>" + title + "</b><br>" + text;
+            tooltip.style.left = x + "px";
+            tooltip.style.top = y + "px";
+            tooltip.style.display = "block";
+        }
+
+        // Function to hide the tooltip
+        function hideTooltip() {
+            var tooltip = document.getElementById("tooltip");
+            tooltip.style.display = "none";
+        }
+
+        // Add an event listener to the map container
+        document.getElementById("map-container").addEventListener("click", function(event) {
+            // Get the click coordinates relative to the container
+            var x = event.pageX - this.offsetLeft;
+            var y = event.pageY - this.offsetTop;
+            
+            // Check if the click is within a specific area (you need to know the coordinates of the area)
+                if (x >= 206 && x <= 232 && y >= 10 && y <= 40) {
+                showTooltip("Veniero\'s", "Historic classic Italian patisserie with an incredible selection.", x, y);
+            }else if (x >= 125 && x <= 145 && y >= 140 && y <= 160) {
+                showTooltip("Prince Tea House", "Contemporary \"tea house\" that offers finger foods and brunch options. The stars of the show are the unique desserts featuring Asian flavors, like a brown sugar boba crepe cake.", x, y);
+            }else if (x >= 120 && x <= 150 && y >= 195 && y <= 225) {
+                showTooltip("MUD", "East Village staple for coffee and a quick breakfast - the line can be long and slow on peak weekend times.", x, y);
+            }else if (x >= 157 && x <= 183 && y >= 195 && y <= 230) {
+                showTooltip("Davey\'s", "Fun ice cream spot offering a limited selection of seasonal Vegan flavors.", x, y);
+            }else if (x >= 250 && x <= 270 && y >= 55 && y <= 80) {
+                showTooltip("Iggy\'s", "Amazing pizza spot with the best cannolis and tiramisu in the area.", x, y);
+            }else if (x >= 75 && x <= 95 && y >= 245 && y <= 275) {
+                showTooltip("Veselka", "\"Rainbow\" in Ukranian - legendary East Village cornerstone offering Ukranian comfort foods. The line will get long at peak meal times.", x, y);
+            }else if (x >= 255 && x <= 275 && y >= 250 && y <= 280) {
+                showTooltip("East Village Pizza", "Reliable pizza joint with a lot of customization options.", x, y);
+            }else if (x >= 85 && x <= 115 && y >= 445 && y <= 480) {
+                showTooltip("Van Leeuwen", "Delicious French ice cream scoop shop with options of sundaes and milkshakes and the best selection of vegan flavors.", x, y);
+            }else if (x >= 165 && x <= 195 && y >= 540 && y <= 570) {
+                showTooltip("Elsewhere Espresso", "Great coffee with fun specialty latte options.", x, y);
+            }else if (x >= 140 && x <= 155 && y >= 580 && y <= 600) {
+                showTooltip("Spicy Moon", "Small and funky dining room with a casual atmosphere serving Scezhuan Chinese - entirely vegan.", x, y);
+            }else if (x >= 210 && x <= 235 && y >= 580 && y <= 600) {
+                showTooltip("Awash Ethiopian", "Cozy Ethiopian spot.", x, y);
+            }else if (x >= 310 && x <= 330 && y >= 260 && y <= 277) {
+                showTooltip("Lime Tree", "Go-to bodega with a friendly grey and white kitty. Watch the expiration dates, though.", x, y);
+            }else if (x >= 310 && x <= 325 && y >= 280 && y <= 305) {
+                showTooltip("East Village Wines", "Nearest liquor store with a decent selection.", x, y);
+            }else if (x >= 430 && x <= 450 && y >= 200 && y <= 230) {
+                showTooltip("Evil Katsu", "Take-out spot offering Japanese katsu prepared by classically trained chefs with vegetarian options such as mushrooms and fried green tomatos.", x, y);
+            }else if (x >= 465 && x <= 485 && y >= 200 && y <= 228) {
+                showTooltip("Poke n\' Roll", "Fresh tasting poke and sushi.", x, y);
+            }else if (x >= 465 && x <= 495 && y >= 233 && y <= 270) {
+                showTooltip("Confectionery!", "Handcrafted chocolate and macarons and other sweets - vegan and artful.", x, y);
+            }else if (x >= 495 && x <= 532 && y >= 295 && y <= 330) {
+                showTooltip("Starbucks", "It\'s Starbucks.", x, y);
+            }else if (x >= 495 && x <= 520 && y >= 385 && y <= 410) {
+                showTooltip("Superiority Burger", "Award winning, cult favorite vegan food served in 90\'s diner ambiance. Don\'t be scared off by the odd sounding menu items - each one is excellent.", x, y);
+            }else if (x >= 495 && x <= 530 && y >= 415 && y <= 440) {
+                showTooltip("787", "Puerto Rican coffee with Latin flavors such as horchata and coquito. Not everyone\'s favorite, but it is where Lisset & Victor went on their first date.", x, y);
+            }else if (x >= 405 && x <= 430 && y >= 407 && y <= 437) {
+                showTooltip("Ladybird", "Upscale sit-down entirely vegan restaurant with thoughtfully prepared and beautifully plated dishes.", x, y);
+            }else if (x >= 300 && x <= 320 && y >= 400 && y <= 435) {
+                showTooltip("Raiz", "Vegan Californian Mexican - closed Sundays and Mondays.", x, y);
+            }else if (x >= 510 && x <= 535 && y >= 37 && y <= 65) {
+                showTooltip("Westville East", "American spot for farm fresh, clean eats, breakfast lunch and dinner. Their drink selection is very delicious. Pay attention to their daily specials.", x, y);
+            }else if (x >= 510 && x <= 530 && y >= 80 && y <= 110) {
+                showTooltip("Tompkins Square Bagels", "Best bagels in town with a variety of unique cream cheese flavors to boot. Their specialty sandwiches are equally delicious. Get there before 10 on weekends if you can, but the line moves fast.", x, y);
+            }else if (x >= 655 && x <= 675 && y >= 92 && y <= 122) {
+                showTooltip("Gnocco", "Italian joint with classics like arancini and a great happy hour selection.", x, y);
+            }else if (x >= 692 && x <= 725 && y >= 90 && y <= 125) {
+                showTooltip("9th Street Espresso", "Features a very limited menu with very high quality options. Coffee enthusiasts LOVE this place.", x, y);
+            }else if (x >= 735 && x <= 755 && y >= 50 && y <= 82) {
+                showTooltip("Desi Galli", "Fresh British-Indian food. Their tikka masala is liquid gold. Try their masala fries, too, for a treat.", x, y);
+            }else if (x >= 675 && x <= 708 && y >= 445 && y <= 478) {
+                showTooltip("C&B cafe", "Popular East Village cafe with a cool vibe. Busy on weekend mornings.", x, y);
+            }else if (x >= 723 && x <= 743 && y >= 539 && y <= 571) {
+                showTooltip("Sunny & Annie\'s", "A top-tier sandwhich shop disguised as a bodega. Plenty of vegan options and sillily-named sandwiches.", x, y);
+            }else {
+                hideTooltip();
+            }
+        });
+    </script>
+</body>
+
+</html>
